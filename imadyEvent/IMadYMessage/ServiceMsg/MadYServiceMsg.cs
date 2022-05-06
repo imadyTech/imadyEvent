@@ -4,37 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMadY.Message
+namespace imady.Message
 {
-    public class IMadYServiceMsg : IMadYServiceMsgBase<object>
+    public class MadYServiceMsg : MadYServiceMsgBase<object>
     {
-        public IMadYServiceMsg()
+        public MadYServiceMsg()
         {
             base.msg = "";
             base.msgBody = null;
             base.success = false;
         }
 
-        public IMadYServiceMsg(bool success): this()
+        public MadYServiceMsg(bool success): this()
         {
             base.success = success;
         }
-        public IMadYServiceMsg(string msg) : this()
+        public MadYServiceMsg(string msg) : this()
         {
             base.msg = msg;
         }
-        public IMadYServiceMsg(string msg, bool success): this(msg)
+        public MadYServiceMsg(string msg, bool success): this(msg)
         {
             base.success = success;
         }
 
-        public IMadYServiceMsg(object value) : this()
+        public MadYServiceMsg(object value) : this()
         {
             base.msgBody = value;
             base.success = true;
         }
 
-        public IMadYServiceMsg(object value, string msg) : this(msg)
+        public MadYServiceMsg(object value, string msg) : this(msg)
         {
             base.msgBody = value;
             base.success = true;

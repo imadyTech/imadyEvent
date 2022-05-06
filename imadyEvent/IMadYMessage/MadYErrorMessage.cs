@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMadY.Message
+namespace imady.Message
 {
-    public class IMadYErrorMessage<T> : IMadYMessageBase where T : class
+    public class MadYErrorMessage<T> : MadYMessageBase where T : class
     {
         public T messageBody { get; set; }
 
-        public IMadYErrorMessage(T message)
+        public MadYErrorMessage(T message)
         {
             messageBody = message;
         }

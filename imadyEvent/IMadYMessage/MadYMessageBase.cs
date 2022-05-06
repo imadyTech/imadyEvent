@@ -1,18 +1,8 @@
 using System;
 
-namespace IMadY.Message
+namespace imady.Message
 {
-    public class IMadYMessageBase<T> : IMadYMessageBase where T : class, IDisposable
-    {
-        public virtual T messageBody { get; set; }
-
-        public IMadYMessageBase(T message)
-        {
-            messageBody = message;
-        }
-    }
-
-    public class IMadYMessageBase : IDisposable
+    public class MadYMessageBase : IDisposable
     {
         public DateTime timeSend { get; set; }
 
@@ -21,15 +11,15 @@ namespace IMadY.Message
         public string senderName { get; set; }
 
 
-        public IMadYMessageBase()
+        public MadYMessageBase()
         {
             timeSend = DateTime.Now;
         }
-        public IMadYMessageBase(Guid userId) : this()
+        public MadYMessageBase(Guid userId) : this()
         {
             senderId = userId;
         }
-        public IMadYMessageBase(string userName) : this()
+        public MadYMessageBase(string userName) : this()
         {
             senderName = userName;
         }
@@ -56,7 +46,7 @@ namespace IMadY.Message
             }
         }
 
-        ~IMadYMessageBase()
+        ~MadYMessageBase()
         {
             Dispose(false);
         }

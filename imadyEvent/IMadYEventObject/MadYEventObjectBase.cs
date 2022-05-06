@@ -1,4 +1,4 @@
-﻿using IMadY.Message;
+﻿using imady.Message;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMadY.Event
+namespace imady.Event
 {
     /// <summary>
     /// 场景中的活动物体的基类 (注：所有的LeeObject都具有FSMBbase状态机的功能)
     /// </summary>
-    public abstract class IMadYEventObjectBase : IIMadYEventObjectBase
+    public abstract class MadYEventObjectBase : IMadYEventObjectBase
     {
         public static string SubscribeLog = string.Empty;
 
@@ -21,9 +21,9 @@ namespace IMadY.Event
 
 
 
-        protected IMadYEventObjectBase()
+        protected MadYEventObjectBase()
         {
-            observers = new List<IIMadYEventObjectBase>();
+            observers = new List<IMadYEventObjectBase>();
         }
 
 
@@ -31,7 +31,7 @@ namespace IMadY.Event
         #region IEVENTSYSTEM METHODS IMPLEMENTATION
         //--------------------------------
 
-        public virtual IMadYEventObjectBase AddEventManager(IMadYEventManager eventSystem)
+        public virtual MadYEventObjectBase AddEventManager(MadYEventManager eventSystem)
         {
             eventSystem.Register(this);
             return this;
@@ -54,7 +54,7 @@ namespace IMadY.Event
         /// Unsubscriber实际上还没实现
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        protected class Unsubscriber<T> : IDisposable where T : IIMadYEventObjectBase
+        protected class Unsubscriber<T> : IDisposable where T : IMadYEventObjectBase
         {
             private List<T> _observers;
             private T _observer;
@@ -74,18 +74,18 @@ namespace IMadY.Event
         #endregion
 
 
-        #region IEventSystemBase supporting features 
+        #region IMadYEventObjectBase supporting features 
         public bool isProvider => providerInterfaces.Count() > 0;
 
         public bool isObserver => observerInterfaces.Count() > 0;
 
         public IEnumerable<Type> providerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IIMadYProvider<>));
 
-        public IEnumerable<Type> observerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IIMadYObserver<>));
+        public IEnumerable<Type> observerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMadYObserver<>));
 
         public Func<Type, bool> providerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IIMadYProvider<>));
 
-        public Func<Type, bool> observerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IIMadYObserver<>));
+        public Func<Type, bool> observerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IMadYObserver<>));
 
         public bool isObservingMessage(Type observingMessageType)
         {
@@ -95,9 +95,9 @@ namespace IMadY.Event
         #endregion
 
 
-        #region IEventSystemBase Subscribe/Notify
-        protected List<IIMadYEventObjectBase> observers;
-        public void Subscribe(IIMadYEventObjectBase observer)
+        #region IMadYEventObjectBase Subscribe/Notify
+        protected List<IMadYEventObjectBase> observers;
+        public void Subscribe(IMadYEventObjectBase observer)
         {
             //遍历自己的providers
             foreach (var providerInterface in providerInterfaces.SelectMany(i => i.GetGenericArguments()))
@@ -119,7 +119,7 @@ namespace IMadY.Event
         /// TODO: 设计MessagePool以提升运行效率。
         /// </summary>
         /// <param name="message"></param>
-        public void NotifyObservers(IMadYMessageBase message)
+        public void NotifyObservers(MadYMessageBase message)
         {
             Type messaggeType = message.GetType();
             var prospectedObservers = observers.Where(o => o.isObservingMessage(messaggeType)).ToList();
