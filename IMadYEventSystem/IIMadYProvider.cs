@@ -1,11 +1,11 @@
 
-using IMadY.Message;
+using imady.Message;
 
-namespace IMadY.Event
+namespace imady.Event
 {
-    public interface IIMadYProvider<T> : IIMadYEventObjectBase where T : IMadYMessageBase
+    public interface IIMadYProvider<T> : IMadYEventObjectBase where T : MadYMessageBase
     {
-        new void Subscribe(IIMadYEventObjectBase observer);
+        new void Subscribe(IMadYEventObjectBase observer);
 
     }
 

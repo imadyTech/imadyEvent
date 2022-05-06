@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace IMadY.Event
+namespace imady.Event
 {
-    public interface IIMadYEventObjectBase
+    public interface IMadYEventObjectBase
     {
         bool isProvider { get; }
         bool isObserver { get; }
@@ -24,6 +24,6 @@ namespace IMadY.Event
         /// 2021-07-22 Update: 改进了过去由dynamic方式执行消息注册的缺陷
         /// </summary>
         /// <param name="observer"></param>
-        void Subscribe(IIMadYEventObjectBase observer);
+        void Subscribe(IMadYEventObjectBase observer);
     }
 }

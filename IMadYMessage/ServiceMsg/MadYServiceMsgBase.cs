@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IMadY.Message
+namespace imady.Message
 {
-    public class IMadYServiceMsgBase<T> 
+    public class MadYServiceMsgBase<T> 
     {
         public bool success { get; set; }
 

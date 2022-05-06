@@ -5,34 +5,34 @@ using System.Linq;
 using System.Reflection;
 using System.Collections;
 
-namespace IMadY.Event
+namespace imady.Event
 {
     /// <summary>
     /// 事件系统管理器
     /// </summary>
-    public class IMadYEventManager
+    public class MadYEventManager
     {
-        private List<IIMadYEventObjectBase> eventSystemMembers;
+        private List<IMadYEventObjectBase> eventSystemMembers;
 
         //同一消息类型，不允许多个provider提供
-        private List<Tuple<Type, IIMadYEventObjectBase>> providers;
+        private List<Tuple<Type, IMadYEventObjectBase>> providers;
         public int ProvidersCount { get => providers.Count; }
         //同一消息类型，可以被多个observer监听
-        private List<Tuple<Type, IIMadYEventObjectBase>> observers;
+        private List<Tuple<Type, IMadYEventObjectBase>> observers;
         public int ObserversCount { get => observers.Count; }
 
-        public IMadYEventManager()
+        public MadYEventManager()
         {
-            providers = new List<Tuple<Type, IIMadYEventObjectBase>>();
-            observers = new List<Tuple<Type, IIMadYEventObjectBase>>();
-            eventSystemMembers = new List<IIMadYEventObjectBase>();
+            providers = new List<Tuple<Type, IMadYEventObjectBase>>();
+            observers = new List<Tuple<Type, IMadYEventObjectBase>>();
+            eventSystemMembers = new List<IMadYEventObjectBase>();
         }
 
         [Obsolete("请使用MappingEventObjects方法。")]
         public void MappingObserversAndObservables()
         {
             //扫描providers的类型
-            foreach (Tuple<Type, IIMadYEventObjectBase> provider in providers)
+            foreach (Tuple<Type, IMadYEventObjectBase> provider in providers)
             {
                 //扫描observer的类型找出需要监听消息的对象
                 //自动匹配消息type与observer监听类型
@@ -41,7 +41,7 @@ namespace IMadY.Event
                                            select o.Item2)
                                           .ToList();
                 //注册
-                foreach (IIMadYEventObjectBase observer in interestedObservers)
+                foreach (IMadYEventObjectBase observer in interestedObservers)
                 {
                     var p = provider.Item2;
                     var o = observer;
@@ -65,7 +65,7 @@ namespace IMadY.Event
         /// 预登记providers/observers（此时不区分提供者、监听者）
         /// </summary>
         /// <param name="member"></param>
-        public void Register(IIMadYEventObjectBase member)
+        public void Register(IMadYEventObjectBase member)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace IMadY.Event
             {
                 TrySubscribe(provider, observers);
             }
-            void TrySubscribe(IIMadYEventObjectBase provider, IIMadYEventObjectBase[] obs)
+            void TrySubscribe(IMadYEventObjectBase provider, IMadYEventObjectBase[] obs)
             {
                 foreach (var ob in obs)
                 {
