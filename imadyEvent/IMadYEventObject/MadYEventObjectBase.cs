@@ -79,11 +79,11 @@ namespace imady.Event
 
         public bool isObserver => observerInterfaces.Count() > 0;
 
-        public IEnumerable<Type> providerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IIMadYProvider<>));
+        public IEnumerable<Type> providerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMadYProvider<>));
 
         public IEnumerable<Type> observerInterfaces => GetType().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMadYObserver<>));
 
-        public Func<Type, bool> providerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IIMadYProvider<>));
+        public Func<Type, bool> providerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IMadYProvider<>));
 
         public Func<Type, bool> observerTester => new Func<Type, bool>(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IMadYObserver<>));
 
