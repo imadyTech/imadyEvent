@@ -13,7 +13,7 @@ namespace imady.Event
     /// <summary>
     /// 场景中的活动物体的基类 (注：所有的LeeObject都具有FSMBbase状态机的功能)
     /// </summary>
-    public abstract class MadYEventObjectBase : IMadYEventObjectBase
+    public abstract partial class MadYEventObjectBase : IMadYEventObjectBase
     {
         public static string SubscribeLog = string.Empty;
 
